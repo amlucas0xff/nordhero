@@ -105,12 +105,10 @@ config_dir = "/etc/wireguard"
 config_wg_file = "/etc/wireguard/wg0.conf"
 ```
 
-### Command Examples
-
-The application manages WireGuard connections using standard commands:
-- Connect: `sudo wg-quick up wg0`
-- Disconnect: `sudo wg-quick down wg0`
-- Status: `sudo wg show wg0`
+### Running the tool
+`python main.py`
+or
+`python main.py --help`
 
 ## Project Structure
 
