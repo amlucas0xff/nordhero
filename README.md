@@ -7,32 +7,32 @@ Features
 - **Smart Server Selection** - Choose servers by country or view top global performers
 - **Connection Management** - Easy connect/disconnect/restart operations
 - **Real-time Monitoring** - Live connection status and transfer statistics
-- **Autostart Configuration** - Set up automatic VPN connection on system boot via systemd
+- **Systemd Service Configuration** - Set up automatic VPN connection on system boot via systemd
 - **Secure Configuration** - Private key stored separately with restricted permissions
 - **User-friendly CLI** - Color-coded interface with clear navigation
 
 ## Sample
 ```
-NordVPN WireGuard Manager
+Nordhero
 ==================================================
 ● Connected
-Server: United States, New York (Load: 45%)
-Hostname: us123.nordvpn.com
-Endpoint: 192.168.1.1
-Latest Handshake: 2 seconds ago
-Transfer: ↓ 1.2 GB received, ↑ 340 MB sent
+Server: Brazil, Sao Paulo (Load: 7%)
+Hostname: br72.nordvpn.com
+Endpoint: 189.1.168.146
+Latest Handshake: 52 seconds ago
+Transfer: ↓ 230.05 kib received, ↑ 258.44 kib sent
 ● Autostart Enabled (System-level)
 ==================================================
+0. Check current setup
+1. ✓ Initial Setup
+2. Update database (Last update: 14 minutes ago)
+3. Show top 10 global servers
+4. Select vpn endpoint
+5. Manage connection (Disconnect or Restart VPN)
+6. Monitor connection (Automatically updates every 1 second)
+7. Manage systemd service
+8. Exit
 
-Main Menu:
-1. Update server list
-2. Select VPN endpoint
-3. Manage connection (connect/disconnect)
-4. Monitor connection
-5. Configure autostart
-6. Exit
-
-Select an option (1-6):
 ```
 
 ## Requirements
@@ -92,7 +92,7 @@ The configuration is stored in `config/config.toml`:
 [wireguard]
 private_key_file = "config/wireguard.key"
 client_ip = "10.5.0.2/32"
-dns = "192.168.68.14"
+dns = "1.1.1.1"
 persistent_keepalive = 25
 
 [database]
@@ -155,7 +155,7 @@ nordhero/
    - Ensure correct private key and client IP
 
 3. **Service Not Starting:**
-   - Check systemd logs: `sudo journalctl -u nordvpn-wireguard`
+   - Check systemd logs: `sudo journalctl -u nordhero-vpn`
    - Verify config file exists at `/etc/wireguard/wg0.conf`
 
 ## Contributing

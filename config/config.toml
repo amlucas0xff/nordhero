@@ -1,0 +1,14 @@
+[wireguard]
+private_key_file = "./config/xxx.key"
+client_ip = "10.5.0.2/32"
+dns = "1.1.1.1"
+persistent_keepalive = 25
+
+[database]
+path = "./db/servers.db"
+max_load = 100
+default_limit = 0
+
+[output]
+config_dir = "/etc/wireguard"
+config_wg_file = "/etc/wireguard/wg0.conf"
