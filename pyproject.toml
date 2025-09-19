@@ -1,0 +1,64 @@
+[project]
+name = "nordhero"
+version = "1.0.0"
+description = "NordVPN WireGuard Manager - A Python-based CLI tool for managing WireGuard VPN connections through NordVPN servers"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "NordHero Team"}
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "toml>=0.10.2",
+    "tqdm>=4.65.0",
+]
+keywords = ["nordvpn", "wireguard", "vpn", "cli", "network"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
+]
+
+[project.urls]
+Homepage = "https://github.com/nordhero/nordhero"
+Repository = "https://github.com/nordhero/nordhero"
+Issues = "https://github.com/nordhero/nordhero/issues"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]

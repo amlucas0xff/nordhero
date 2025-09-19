@@ -1,0 +1,34 @@
+# Example configuration file for Nordhero
+# Copy this to config/config.toml and fill in your details
+
+[wireguard]
+# Path to your WireGuard private key file
+# Get your private key from: https://my.nordaccount.com/dashboard/nordvpn/manual-configuration/
+private_key_file = "config/wireguard.key"
+
+# Your client IP address (usually provided by NordVPN)
+client_ip = "10.5.0.2/32"
+
+# DNS server to use (you can use your preferred DNS)
+# Examples: 1.1.1.1 (Cloudflare), 8.8.8.8 (Google), or your local router
+dns = "1.1.1.1"
+
+# Keep-alive interval in seconds
+persistent_keepalive = 25
+
+[database]
+# Path to the local server database
+path = "./db/servers.db"
+
+# Maximum server load to consider (0-100)
+max_load = 100
+
+# Default limit for API calls (0 = no limit)
+default_limit = 0
+
+[output]
+# Directory where WireGuard configs are stored
+config_dir = "/etc/wireguard"
+
+# Path to the WireGuard configuration file
+config_wg_file = "/etc/wireguard/wg0.conf"

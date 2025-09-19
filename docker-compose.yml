@@ -1,0 +1,113 @@
+version: '3.8'
+
+services:
+  nordhero:
+    build: .
+    container_name: nordhero
+    image: nordhero:latest
+    
+    # Required for WireGuard management
+    cap_add:
+      - NET_ADMIN      # Required for network interface management
+      - SYS_MODULE     # Optional: for kernel module loading
+    
+    # Device access for WireGuard
+    devices:
+      - /dev/net/tun:/dev/net/tun   # Required for userspace WireGuard implementation
+    
+    # Kernel parameters for networking
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1    # Enable source address validation
+      - net.ipv4.ip_forward=1                 # Enable IP forwarding
+      - net.ipv6.conf.all.disable_ipv6=0      # Keep IPv6 enabled
+    
+    # Environment variables for container configuration
+    environment:
+      # Container identification
+      - NORDHERO_CONTAINER_MODE=true
+      
+      # Paths (already set in Dockerfile, but can be overridden)
+      - NORDHERO_CONFIG_PATH=/app/config
+      - NORDHERO_DATABASE_PATH=/app/data/servers.db
+      - NORDHERO_WG_CONFIG_PATH=/etc/wireguard/wg0.conf
+      
+      # Optional: Auto-configuration variables (uncomment and set if desired)
+      # - NORDHERO_PRIVATE_KEY=your_wireguard_private_key_here
+      # - NORDHERO_CLIENT_IP=10.5.0.2/32
+      # - NORDHERO_DNS=103.86.96.100
+      # - NORDHERO_KEEPALIVE=25
+      # - NORDHERO_MAX_LOAD=100
+      # - NORDHERO_DEFAULT_LIMIT=0
+      
+      # Timezone
+      - TZ=UTC
+    
+    # Persistent volumes
+    volumes:
+      # Configuration and data persistence
+      - nordhero_config:/app/config
+      - nordhero_data:/app/data
+      - nordhero_wireguard:/etc/wireguard
+      
+      # Optional: Kernel modules (for older systems)
+      - /lib/modules:/lib/modules:ro
+      
+      # Optional: Mount host's resolv.conf for DNS (if needed)
+      # - /etc/resolv.conf:/etc/resolv.conf:ro
+    
+    # Ports (for future web UI or API)
+    ports:
+      - "8080:8080"   # Web UI port (if implemented)
+    
+    # Networking
+    network_mode: bridge
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "wg", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Resource limits (optional)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # Example: Additional container that routes through VPN
+  # Uncomment and modify as needed
+  # app:
+  #   image: nginx:latest
+  #   container_name: app-through-vpn
+  #   depends_on:
+  #     - nordhero
+  #   network_mode: "service:nordhero"  # Routes traffic through nordhero container
+  #   volumes:
+  #     - ./html:/usr/share/nginx/html:ro
+
+# Named volumes for persistence
+volumes:
+  nordhero_config:
+    driver: local
+  nordhero_data:
+    driver: local
+  nordhero_wireguard:
+    driver: local
+
+# Optional: Custom network (if not using service network mode)
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16

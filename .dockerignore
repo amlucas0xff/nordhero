@@ -1,0 +1,118 @@
+# Dockerignore file for NordHero
+# Excludes unnecessary files from Docker build context
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache
+.mypy_cache
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+*.md
+docs/
+*.txt
+!requirements.txt
+LICENSE
+
+# Configuration and sensitive files
+config/
+*.key
+*.conf
+*.toml
+!pyproject.toml
+.env
+.env.*
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Test files and coverage
+tests/
+test_*.py
+*_test.py
+htmlcov/
+.coverage
+
+# Docker files (except Dockerfile and docker-compose.yml)
+docker-compose.override.yml
+docker-compose.*.yml
+.dockerignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+
+# Package files
+*.tar.gz
+*.zip
+*.rar
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+
+# Backup files
+*.bak
+*.backup
+
+# Local development files
+.local/
+local/

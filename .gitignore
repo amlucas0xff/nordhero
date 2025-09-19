@@ -1,0 +1,56 @@
+.aider*
+.env
+/config.toml
+/wireguard.key
+servers.db
+__pycache__/
+*/__pycache__/
+*.pyc
+
+# Added by Claude Task Master
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+# Dependency directories
+node_modules/
+# Environment variables
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# OS specific
+.DS_Store
+# IDE specific
+.cursor/
+# Task files
+tasks.json
+tasks/
+# Python virtual environment
+.venv/
+venv/
+# Pytest cache
+.pytest_cache/
+# Coverage reports
+htmlcov/
+.coverage
+# UV lock file is committed, but backup files should be ignored
+uv.lock.bak
+# Development database files
+db/
+config/
+# PostScript documentation files (generated artifacts)
+argparse
+logging
+os
+signal
+subprocess
+sys
+time
